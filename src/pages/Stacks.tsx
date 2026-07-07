@@ -147,7 +147,7 @@ export default function Stacks() {
           </h2>
           <p
             style={{
-              fontSize: "13px",
+              fontSize: "14px",
               color: "#555",
               lineHeight: 1.65,
               margin: 0,

@@ -18,10 +18,9 @@ const providers: CertProvider[] = [
     org: "IBM",
     initials: "IBM",
     meta: "Full Stack Software Developer",
-    progress: { done: 3, total: 15 },
+    progress: { done: 2, total: 15 },
     certificates: [
       { name: "Developing Front-End Apps with React", done: true },
-      { name: "Developing Back-End Apps with Node.js and Express", done: true },
       { name: "Python for Data Science, AI & Development", done: true },
     ],
   },

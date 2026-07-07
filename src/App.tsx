@@ -7,16 +7,16 @@ import Stacks from './pages/Stacks'
 import Certifications from './pages/Certifications'
 
 function App() {
-
   return (
     <>
       <Nav />
       <LandingPage />
-      <About />
-      <Experience />
-      <Projects />
-      <Stacks />
-      <Certifications />
+
+      <div id="about">        <About />         </div>
+      <div id="experience">  <Experience />     </div>
+      <div id="projects">    <Projects />       </div>
+      <div id="stacks">      <Stacks />         </div>
+      <div id="certifications"><Certifications /></div>
     </>
   )
 }

@@ -147,10 +147,10 @@ function ExperienceCard({
 
         {/* Content */}
         <div style={{ flex: 1, minWidth: 0 }}>
-          <p style={{ fontSize: "14px", fontWeight: 500, color: "#e5e5e5", margin: "0 0 2px" }}>
+          <p style={{ fontSize: "15px", fontWeight: 500, color: "#e5e5e5", margin: "0 0 2px" }}>
             {entry.org}
           </p>
-          <p style={{ fontSize: "12px", color: "#555", margin: "0 0 16px" }}>
+          <p style={{ fontSize: "13px", color: "#555", margin: "0 0 16px" }}>
             {entry.meta}
           </p>
 
@@ -202,7 +202,7 @@ function ExperienceCard({
                 >
                   {role.dateRange} · {role.duration}
                 </p>
-                <p style={{ fontSize: "13px", color: "#909090", lineHeight: 1.65, margin: "0 0 10px" }}>
+                <p style={{ fontSize: "14px", color: "#909090", lineHeight: 1.65, margin: "0 0 10px" }}>
                   {role.description}
                 </p>
 

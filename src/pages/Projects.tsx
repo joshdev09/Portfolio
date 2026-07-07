@@ -155,7 +155,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
           </span>
           <span
             style={{
-              fontSize: "10px",
+              fontSize: "13px",
               color: "#6b6b6b",
               border: "1px solid #2e2e2e",
               borderRadius: "999px",
@@ -266,7 +266,7 @@ export default function Projects() {
           >
             projects
           </h2>
-          <p style={{ fontSize: "13px", color: "#555", lineHeight: 1.65, margin: 0 }}>
+          <p style={{ fontSize: "14px", color: "#555", lineHeight: 1.65, margin: 0 }}>
             Things I've built — from providing technological solutions, education open-source, to fostering culutral game development for preserving cultural identity.
           </p>
         </div>
