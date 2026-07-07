@@ -1,4 +1,5 @@
 import photo from '../assets/images/me-photo.png'
+import Button from '../components/Button'
 
 function About() {
   return (
@@ -23,7 +24,7 @@ function About() {
 
             {/* Section label */}
             <div className="flex items-center gap-3">
-              <div className="w-5 h-px bg-[#6b7280]" />
+              <div className="w-7 h-px bg-[#6b7280]" />
               <span className="text-[#6b7280] text-xs font-semibold tracking-widest uppercase">
                 About
               </span>
@@ -31,16 +32,16 @@ function About() {
 
             {/* Name + Verified */}
             <div>
-              <div className="flex items-center gap-2.5 flex-wrap">
-                <h1 className="text-3xl md:text-4xl font-bold text-[#f0f2f5]">
-                  Joshua Halili
-                </h1>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="#60a5fa" className="size-6 shrink-0">
+              <div className="flex items-center gap-1 flex-wrap">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="#60a5fa" className="size-5 shrink-0">
                   <path fillRule="evenodd" d="M16.403 12.652a3 3 0 0 0 0-5.304 3 3 0 0 0-3.75-3.751 3 3 0 0 0-5.305 0 3 3 0 0 0-3.751 3.75 3 3 0 0 0 0 5.305 3 3 0 0 0 3.75 3.751 3 3 0 0 0 5.305 0 3 3 0 0 0 3.751-3.75Zm-2.546-4.46a.75.75 0 0 0-1.214-.883l-3.483 4.79-1.88-1.88a.75.75 0 1 0-1.06 1.061l2.5 2.5a.75.75 0 0 0 1.137-.089l4-5.5Z" clipRule="evenodd" />
                 </svg>
+                <h1 className="text-2xl md:text-2xl font-bold text-[#f0f2f5]">
+                  Joshua Halili
+                </h1>
               </div>
-              <p className="text-[#6b7280] text-xs font-semibold tracking-widest uppercase mt-1.5">
-                Front-End Developer · Full-Stack Developer
+              <p className="text-[#6b7280] text-[10px] font-semibold tracking-widest uppercase mt-1.5">
+                Software Developer · Full-Stack Developer · Front-end Ai Engineer
               </p>
 
               {/* Meta */}
@@ -65,9 +66,9 @@ function About() {
 
             {/* Bio */}
             <p className="text-[#a1a1aa] text-base leading-relaxed">
-              IT Web Development Student and Web Development Lead at{' '}
+              IT Web Development Student and <span className="text-[#f0f2f5] font-bold">Web Development Lead </span> at{' '}
               <span className="text-[#f0f2f5] font-bold">Google Developers Group on Campus</span>
-              {' '}— Holy Angel University. I build and design modern, responsive websites, crafting digital experiences that are both functional and visually engaging while helping others grow through technology.
+              {' '}— Holy Angel University. I develop full-stack web applications, design modern front-end experiences, and leverage AI to build smarter, more efficient digital products.
             </p>
 
             {/* Social Links */}
@@ -115,6 +116,8 @@ function About() {
                 <span>LinkedIn</span>
               </a>
             </div>
+
+            <Button />
 
           </div>
         </div>
