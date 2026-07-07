@@ -1,6 +1,24 @@
 export default function WavesBackground() {
   return (
     <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
+      <style>{`
+        @keyframes wave1 {
+          from { transform: translateX(0); }
+          to { transform: translateX(-37.5%); }
+        }
+        @keyframes wave2 {
+          from { transform: translateX(0); }
+          to { transform: translateX(-41.6667%); }
+        }
+        @keyframes wave3 {
+          from { transform: translateX(0); }
+          to { transform: translateX(-50%); }
+        }
+        svg g {
+          transform-box: view-box;
+        }
+      `}</style>
+
       <svg
         className="w-full h-full"
         viewBox="0 0 1440 900"

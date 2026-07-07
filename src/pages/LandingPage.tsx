@@ -41,7 +41,7 @@ export default function LandingPage() {
   const mounted = useMounted();
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#f0f2f5] text-[#1a1a1a] font-sans overflow-hidden">
+    <div className="relative min-h-screen flex flex-col bg-[#f0f2f5] text-[#1a1a1a] font-sans overflow-hidden">
       <WavesBackground />
 
       {/* ── MAIN ── */}
