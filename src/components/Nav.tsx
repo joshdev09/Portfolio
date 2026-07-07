@@ -6,6 +6,7 @@ const navLinks = [
   { label: "Projects",       id: "projects" },
   { label: "Stacks",         id: "stacks" },
   { label: "Certifications", id: "certifications" },
+  { label: "Blog",           id: "blog" },
 ];
 
 function scrollToSection(id: string) {
@@ -48,7 +49,7 @@ function Nav() {
         {/* ── Pill bar ── */}
         <nav className="
           bg-[#333333]/40 backdrop-blur-md border border-white/10 shadow-lg
-          mt-4 px-5 py-3 rounded-full w-full max-w-[45rem]
+          mt-4 px-5 py-3 rounded-full w-full max-w-[50rem]
           flex items-center justify-between gap-4
         ">
           {/* Logo */}

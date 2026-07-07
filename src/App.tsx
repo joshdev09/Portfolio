@@ -5,6 +5,7 @@ import Experience from './pages/Experience'
 import Projects from './pages/Projects'
 import Stacks from './pages/Stacks'
 import Certifications from './pages/Certifications'
+import Blog from './pages/Blog'
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
       <div id="projects">    <Projects />       </div>
       <div id="stacks">      <Stacks />         </div>
       <div id="certifications"><Certifications /></div>
+      <div id="blog">         <Blog />          </div>
     </>
   )
 }

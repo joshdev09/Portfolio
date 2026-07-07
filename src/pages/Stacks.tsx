@@ -151,7 +151,7 @@ export default function Stacks() {
               color: "#555",
               lineHeight: 1.65,
               margin: 0,
-              maxWidth: "340px",
+              maxWidth: "700px",
             }}
           >
             The tools, frameworks, and platforms I reach for — across the front end, back end, and AI.

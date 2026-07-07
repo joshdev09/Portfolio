@@ -46,8 +46,8 @@ const experiences: ExperienceEntry[] = [
       },
       {
         title: "AI / ML Engineer Staff",
-        dateRange: "Sep 2025 – Present",
-        duration: "11 mos",
+        dateRange: "Sep 2025 – March 2026",
+        duration: "7 mos",
         description:
           "Former AI/ML Engineer Staff at Holy Angel University. Collaborated with team leads in planning and executing workshops focused on artificial intelligence and machine learning. Supported event organization, technical preparation, and knowledge-sharing initiatives to help students explore emerging technologies.",
         tags: ["RAG", "Artificial Intelligence"],
