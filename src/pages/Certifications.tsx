@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import React from "react"
 
 interface Certificate {
   name: string;
@@ -334,15 +335,12 @@ export default function Certifications() {
         {/* Providers */}
         <div style={{ display: "flex", flexDirection: "column", gap: "3rem" }}>
           {providers.map((provider, i) => (
-            <>
-              <ProviderSection key={provider.org} provider={provider} index={i} />
+            <React.Fragment key={provider.org}>
+              <ProviderSection provider={provider} index={i} />
               {i < providers.length - 1 && (
-                <div
-                  key={`div-${i}`}
-                  style={{ height: "1px", background: "#222", marginTop: "-1.5rem" }}
-                />
+                <div style={{ height: "1px", background: "#222", marginTop: "-1.5rem" }} />
               )}
-            </>
+            </React.Fragment>
           ))}
         </div>
       </section>

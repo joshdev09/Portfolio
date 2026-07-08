@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const navLinks = [
   { label: "About",          id: "about" },
@@ -9,50 +10,78 @@ const navLinks = [
   { label: "Blog",           id: "blog" },
 ];
 
-function scrollToSection(id: string) {
-  const el = document.getElementById(id);
-  if (!el) return;
-  el.scrollIntoView({ behavior: "smooth", block: "start" });
-}
-
-function scrollToTop() {
-  window.scrollTo({ top: 0, behavior: "smooth" });
-}
-
 function Nav() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [scrolled, setScrolled]   = useState(false);
-  const [activeId, setActiveId]   = useState<string>("");
+  const [scrolled, setScrolled]  = useState(false);
+  const [activeId, setActiveId]  = useState<string>("");
+  const navigate  = useNavigate();
+  const location  = useLocation();
+
+  const isHome = location.pathname === "/";
+
+  // Scroll to a section — if not on home, go home first then scroll
+  function handleNavClick(id: string) {
+    setMenuOpen(false);
+    if (isHome) {
+      scrollToId(id);
+    } else {
+      // Navigate home, then scroll after paint
+      navigate("/");
+      setTimeout(() => scrollToId(id), 80);
+    }
+  }
+
+  function scrollToId(id: string) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const navHeight = 72;
+    const top = el.getBoundingClientRect().top + window.scrollY - navHeight;
+    window.scrollTo({ top, behavior: "smooth" });
+  }
+
+  function scrollToTop() {
+    if (isHome) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      navigate("/");
+    }
+  }
 
   useEffect(() => {
+    if (!isHome) return; // don't track sections on blog post pages
+
     function onScroll() {
       setScrolled(window.scrollY > 200);
-
-      // Highlight the section whose top is closest above 40% of viewport
-      const mid = window.scrollY + window.innerHeight * 0.4;
+      const threshold = window.scrollY + window.innerHeight * 0.4;
       let current = "";
       for (const { id } of navLinks) {
         const el = document.getElementById(id);
-        if (el && el.offsetTop <= mid) current = id;
+        if (el && el.offsetTop <= threshold) current = id;
       }
       setActiveId(current);
     }
+
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [isHome]);
+
+  // Always show FAB scroll-up on blog post pages too
+  useEffect(() => {
+    if (isHome) return;
+    function onScroll() { setScrolled(window.scrollY > 200); }
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [isHome]);
 
   return (
     <>
       <div className="flex flex-col items-center fixed top-0 w-full z-50 px-4">
-
-        {/* ── Pill bar ── */}
         <nav className="
           bg-[#333333]/40 backdrop-blur-md border border-white/10 shadow-lg
-          mt-4 px-5 py-3 rounded-full w-full max-w-[50rem]
+          mt-4 px-5 py-3 rounded-full w-full max-w-[45rem]
           flex items-center justify-between gap-4
         ">
-          {/* Logo */}
           <h1
             onClick={scrollToTop}
             className="text-white font-semibold text-sm shrink-0 roboto-uniquifier cursor-pointer select-none"
@@ -60,16 +89,15 @@ function Nav() {
             JHalili
           </h1>
 
-          {/* Desktop links */}
           <ul className="hidden md:flex gap-7 inter-uniquifier text-sm items-center">
             {navLinks.map(({ label, id }) => (
               <li
                 key={id}
-                onClick={() => scrollToSection(id)}
+                onClick={() => handleNavClick(id)}
                 className="cursor-pointer transition-colors duration-200 select-none"
                 style={{
-                  color: activeId === id ? "#ffffff" : "rgba(255,255,255,0.55)",
-                  fontWeight: activeId === id ? 500 : 400,
+                  color: isHome && activeId === id ? "#ffffff" : "rgba(255,255,255,0.55)",
+                  fontWeight: isHome && activeId === id ? 500 : 400,
                 }}
               >
                 {label}
@@ -77,7 +105,6 @@ function Nav() {
             ))}
           </ul>
 
-          {/* Right: CV button + hamburger */}
           <div className="flex items-center gap-1 shrink-0">
             <button className="rounded-full hover:bg-white/10 p-1.5 cursor-pointer hover:-translate-y-0.5 transition-all duration-300 ease-in-out">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="size-5 text-[#f0f2f5]">
@@ -86,7 +113,6 @@ function Nav() {
               </svg>
             </button>
 
-            {/* Hamburger — mobile only */}
             <button
               onClick={() => setMenuOpen((p) => !p)}
               className="md:hidden rounded-full hover:bg-white/10 p-1.5 cursor-pointer transition-all duration-200"
@@ -103,27 +129,23 @@ function Nav() {
           </div>
         </nav>
 
-        {/* ── Mobile dropdown ── */}
-        <div
-          className={`
-            md:hidden w-full max-w-[45rem] overflow-hidden
-            transition-all duration-300 ease-in-out
-            ${menuOpen ? "max-h-80 opacity-100 mt-2" : "max-h-0 opacity-0 mt-0"}
-          `}
-        >
+        <div className={`
+          md:hidden w-full max-w-[45rem] overflow-hidden
+          transition-all duration-300 ease-in-out
+          ${menuOpen ? "max-h-80 opacity-100 mt-2" : "max-h-0 opacity-0 mt-0"}
+        `}>
           <ul className="
             bg-[#333333]/40 backdrop-blur-md border border-white/10 shadow-lg
-            rounded-2xl px-5 py-4 flex flex-col gap-4
-            text-sm inter-uniquifier
+            rounded-2xl px-5 py-4 flex flex-col gap-4 text-sm inter-uniquifier
           ">
             {navLinks.map(({ label, id }) => (
               <li
                 key={id}
-                onClick={() => { scrollToSection(id); setMenuOpen(false); }}
+                onClick={() => handleNavClick(id)}
                 className="cursor-pointer transition-colors duration-200 py-0.5 select-none"
                 style={{
-                  color: activeId === id ? "#ffffff" : "rgba(255,255,255,0.6)",
-                  fontWeight: activeId === id ? 500 : 400,
+                  color: isHome && activeId === id ? "#ffffff" : "rgba(255,255,255,0.6)",
+                  fontWeight: isHome && activeId === id ? 500 : 400,
                 }}
               >
                 {label}
@@ -133,7 +155,7 @@ function Nav() {
         </div>
       </div>
 
-      {/* ── Scroll-to-top FAB ── */}
+      {/* Scroll-to-top FAB */}
       <button
         onClick={scrollToTop}
         aria-label="Scroll to top"
@@ -157,14 +179,6 @@ function Nav() {
           transform: scrolled ? "translateY(0) scale(1)" : "translateY(12px) scale(0.85)",
           pointerEvents: scrolled ? "auto" : "none",
           transition: "opacity 0.3s ease, transform 0.3s cubic-bezier(0.22,1,0.36,1)",
-        }}
-        onMouseEnter={(e) => {
-          (e.currentTarget as HTMLButtonElement).style.background = "rgba(70,70,70,0.7)";
-          (e.currentTarget as HTMLButtonElement).style.transform = "translateY(-2px) scale(1)";
-        }}
-        onMouseLeave={(e) => {
-          (e.currentTarget as HTMLButtonElement).style.background = "rgba(50,50,50,0.6)";
-          (e.currentTarget as HTMLButtonElement).style.transform = scrolled ? "translateY(0) scale(1)" : "translateY(12px) scale(0.85)";
         }}
       >
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="rgba(255,255,255,0.7)" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
