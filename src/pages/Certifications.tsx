@@ -29,9 +29,9 @@ const providers: CertProvider[] = [
     org: "Anthropic",
     initials: "ANT",
     meta: "AI Safety & Applications",
-    progress: { done: 0, total: 20 },
+    progress: { done: 1, total: 20 },
     certificates: [
-      { name: "Intro to Claude", done: false },
+      { name: "AI Fluency: Framework & Foundations", done: true },
       { name: "Prompt Engineering Fundamentals", done: false },
       { name: "Building with the Claude API", done: false },
       { name: "AI Safety Essentials", done: false },

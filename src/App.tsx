@@ -9,6 +9,8 @@ import Stacks from './pages/Stacks'
 import Certifications from './pages/Certifications'
 import Blog from './pages/Blog'
 import BlogPost from './pages/BlogPost'
+import Recommendations from './pages/Recommendations'
+import Footer from './components/Footer'
 
 function Home() {
   return (
@@ -20,9 +22,12 @@ function Home() {
       <div id="stacks">         <Stacks />         </div>
       <div id="certifications"> <Certifications /> </div>
       <div id="blog">           <Blog />           </div>
+      <div id="recommendations">           <Recommendations />           </div>
+      <div id="footer">           <Footer />           </div>
     </>
   )
 }
+
 function ScrollToTop() {
   const { pathname } = useLocation()
   useEffect(() => {
