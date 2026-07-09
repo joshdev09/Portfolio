@@ -27,12 +27,16 @@ const stack: StackGroup[] = [
     items: ["Vercel", "Git", "GitHub"],
   },
   {
+    label: " Frontend Email Integration Service",
+    items: ["EmailJS"],
+  },
+  {
     label: "AI & Development Tools",
     items: ["Google Gemini", "Anthropic", "Antigravity"],
   },
   {
     label: "Design & Other Tools",
-    items: ["Figma", "VS Code", "Adobe Premiere Pro",],
+    items: ["Figma", "Canva", "VS Code", "Adobe Premiere Pro",],
   },
 ];
 

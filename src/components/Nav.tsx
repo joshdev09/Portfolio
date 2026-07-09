@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import emailjs from "@emailjs/browser";
 
 const navLinks = [
   { label: "About",          id: "about" },
@@ -44,7 +45,10 @@ function ContactModal({ open, onClose }: { open: boolean; onClose: () => void })
 
   // Reset form when re-opened
   useEffect(() => {
-    if (open) { setSent(false); setSending(false); }
+    if (open) { 
+      setSent(false); 
+      setSending(false); 
+    }
   }, [open]);
 
   function handleBackdropClick(e: React.MouseEvent) {
@@ -52,11 +56,41 @@ function ContactModal({ open, onClose }: { open: boolean; onClose: () => void })
   }
 
   async function handleSubmit() {
-    if (!name.trim() || !email.trim() || !subject.trim()) return;
+    if (!name.trim() || !email.trim() || !subject.trim() || !details.trim()) return;
+    
     setSending(true);
-    await new Promise(r => setTimeout(r, 1200)); // simulate send
-    setSending(false);
-    setSent(true);
+
+    try {
+      const currentTime = new Date().toLocaleString('en-US', { 
+        dateStyle: 'medium', 
+        timeStyle: 'short' 
+      });
+
+      const combinedMessage = `[Category: ${category.toUpperCase()}]\nSubject: ${subject}\n\n${details}`;
+
+      const templateParams = {
+        name: name,
+        email: email,
+        time: currentTime,
+        message: combinedMessage,
+      };
+
+      await emailjs.send(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        templateParams,
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+      );
+
+      setSent(true);
+      // Optional: clear form fields upon success
+      setName(""); setEmail(""); setSubject(""); setDetails("");
+    } catch (error) {
+      console.error("FAILED to send message via EmailJS...", error);
+      alert("Uh oh! Something went wrong sending your message. Please try again later.");
+    } finally {
+      setSending(false);
+    }
   }
 
   const inputStyle: React.CSSProperties = {
@@ -230,7 +264,6 @@ function ContactModal({ open, onClose }: { open: boolean; onClose: () => void })
                           transition: "all 0.2s ease",
                         }}
                       >
-                        
                         {c.label}
                       </button>
                     );
@@ -301,23 +334,23 @@ function ContactModal({ open, onClose }: { open: boolean; onClose: () => void })
               {/* ── Submit ── */}
               <button
                 onClick={handleSubmit}
-                disabled={sending || !name.trim() || !email.trim() || !subject.trim()}
+                disabled={sending || !name.trim() || !email.trim() || !subject.trim() || !details.trim()}
                 style={{
                   width: "100%",
                   padding: "12px",
                   borderRadius: "12px",
                   border: "none",
-                  background: (!name.trim() || !email.trim() || !subject.trim())
+                  background: (!name.trim() || !email.trim() || !subject.trim() || !details.trim())
                     ? "#e5e7eb"
                     : "#1a1a1a",
-                  color: (!name.trim() || !email.trim() || !subject.trim())
+                  color: (!name.trim() || !email.trim() || !subject.trim() || !details.trim())
                     ? "#9ca3af"
                     : "#ffffff",
                   fontSize: "13px",
                   fontWeight: 600,
                   fontFamily: "Inter, sans-serif",
                   letterSpacing: "0.03em",
-                  cursor: (!name.trim() || !email.trim() || !subject.trim()) ? "not-allowed" : "pointer",
+                  cursor: (!name.trim() || !email.trim() || !subject.trim() || !details.trim()) ? "not-allowed" : "pointer",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
@@ -389,7 +422,7 @@ function Nav() {
   function scrollToId(id: string) {
     const el = document.getElementById(id);
     if (!el) return;
-    const navHeight = 72;
+    const navHeight = 0;
     const top = el.getBoundingClientRect().top + window.scrollY - navHeight;
     window.scrollTo({ top, behavior: "smooth" });
   }
