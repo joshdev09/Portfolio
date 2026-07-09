@@ -44,7 +44,7 @@ const projects: Project[] = [
       "A mobile-first rhythm and discovery game that takes players on a journey across the Visayas islands, scanning and unlocking traditional indigenous instruments — from the Cebuano Gitara to the Tulali and Korlong — while learning the folklore and cultural significance behind each one.",
     lang: "TypeScript",
     langColor: "#3178c6",
-    href: "https://github.com/joshdev09/musikultura",
+    href: "https://github.com/joshdev09/Echoes-of-the-Ancestors",
     stars: 1,
   },
   {
