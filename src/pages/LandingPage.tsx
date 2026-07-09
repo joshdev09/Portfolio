@@ -159,9 +159,6 @@ export default function LandingPage() {
         <span className="text-[7px] sm:text-[8px] tracking-[0.12em] sm:tracking-[0.14em] font-medium text-[#aaa] uppercase">
           © 2026 Shua <span className="mx-1 sm:mx-1.5 opacity-50">///</span> All rights reserved
         </span>
-        <span className="text-[7px] sm:text-[8px] tracking-[0.12em] sm:tracking-[0.14em] font-medium text-[#aaa] uppercase">
-          /// System Operational
-        </span>
       </footer>
     </div>
   );
