@@ -25,7 +25,7 @@ export default function WavesBackground() {
         preserveAspectRatio="xMidYMid slice"
         xmlns="http://www.w3.org/2000/svg"
       >
-        {/* Wave 1 — slow */}
+        {/* Wave 1 */}
         <g className="animate-[wave1_8s_linear_infinite]">
           <path
             d="M0,600 C180,520 360,680 540,600 C720,520 900,680 1080,600
@@ -35,7 +35,7 @@ export default function WavesBackground() {
             fill="rgba(180,185,200,0.18)"
           />
         </g>
-        {/* Wave 2 — medium, reversed */}
+        {/* Wave 2 */}
         <g className="animate-[wave2_12s_linear_infinite_reverse]">
           <path
             d="M0,640 C200,560 400,720 600,640 C800,560 1000,720 1200,640
@@ -45,7 +45,7 @@ export default function WavesBackground() {
             fill="rgba(160,168,190,0.14)"
           />
         </g>
-        {/* Wave 3 — fast, most subtle */}
+        {/* Wave 3 */}
         <g className="animate-[wave3_16s_linear_infinite]">
           <path
             d="M0,680 C240,580 480,760 720,680 C960,580 1200,760 1440,680
